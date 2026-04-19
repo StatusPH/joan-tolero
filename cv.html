@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joan Tolero — Curriculum Vitae</title>
+
+  <!-- Prevent Flash before paint -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+
+  <!-- StatusPH Master Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       STATUSPH EXECUTIVE CV TOKENS
+       Shared with master.html for 1:1 Design Parity
+    ============================================================ */
+    :root {
+      --accent: #7C3AED;
+      --accent-color: var(--accent, #2563EB);
+      --accent-muted: #EDE9FE;
+      --bg: #F9F8F6;
+      --surface: #FFFFFF;
+      --text: #1A1A1A;
+      --text-muted: #6B6B6B;
+      --border: #E8E6E1;
+      --radius: 2px;
+      --font-display: 'DM Serif Display',
+      Georgia,
+      serif;
+      --font-body: 'DM Sans',
+      system-ui,
+      sans-serif;
+
+      /* Fixed Spacing Scale */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 16px;
+      --space-xl: 24px;
+      --space-2xl: 32px;
+      --space-3xl: 40px;
+      --space-4xl: 48px;
+
+      /* Print-optimized Font Scale */
+      --text-xs: 8pt;
+      --text-sm: 9pt;
+      --text-base: 10.5pt;
+      --text-lg: 12pt;
+      --text-xl: 14pt;
+      --text-2xl: 18pt;
+      --text-3xl: 24pt;
+      --text-4xl: 32pt;
+
+      --border-thin: 1px;
+      --border-thick: 3px;
+      --section-aside-width: 160px;
+      /* Narrower for A4 */
+      --radius-sm: 2px;
+      --radius-md: 4px;
+      --radius-lg: 8px;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --transition-base: 0.3s ease;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #121212;
+      --surface: #1E1E1E;
+      --text: #F8F8F8;
+      --text-muted: #A0A0A0;
+      --border: #2A2A2A;
+    }
+
+    /* ============================================================
+       A4 & PRINT CONFIGURATION
+    ============================================================ */
+    @page {
+      size: A4 portrait;
+      margin: 15mm 18mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      line-height: 1.5;
+      background: #F4F4F4;
+      /* Background for screen preview only */
+      -webkit-font-smoothing: antialiased;
+      transition: background-color var(--transition-base), color var(--transition-base);
+    }
+
+    @media screen {
+      body {
+        background: #E5E7EB;
+        /* Neutral gray backdrop */
+        padding: 40px 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: background-color var(--transition-base);
+        /* Prevent horizontal scroll from scaled sheet */
+        overflow-x: hidden;
+      }
+
+      :root[data-theme="dark"] body {
+        background: #111827;
+      }
+
+      .cv-container {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        background: #FFFFFF !important;
+        color: #1A1A1A !important;
+        padding: 15mm 20mm;
+        position: relative;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transform-origin: top center;
+        transition: transform 0.3s ease;
+      }
+
+      /* Global Scaling Logic: Fits A4 sheet to screen width precisely */
+      @media (max-width: 210mm) {
+        body {
+          padding: 10px 0 100px;
+        }
+
+        /* Bottom padding for sticky link */
+        .cv-container {
+          transform: scale(calc(100vw / 210mm));
+          margin-left: 0;
+          margin-right: 0;
+        }
+
+        /* Compressing spacing for the print control on tiny screens */
+        .print-control {
+          width: 90vw !important;
+          transform: scale(0.85);
+          margin-bottom: 10px !important;
+        }
+      }
+
+      /* Force Document Fidelity (Paper stays white) */
+      .cv-container .name,
+      .cv-container .section-title,
+      .cv-container .card-title,
+      .cv-container .summary-text,
+      .cv-container .card-details li {
+        color: #1A1A1A !important;
+      }
+
+      .cv-container .job-title,
+      .cv-container .meta-contact,
+      .cv-container .meta-contact span,
+      .cv-container .section-subtitle,
+      .cv-container .card-sub,
+      .cv-container .branding-line {
+        color: #555555 !important;
+      }
+
+      .cv-container .card {
+        background: #FFFFFF !important;
+        border-color: #E8E6E1 !important;
+        box-shadow: none;
+      }
+
+      .print-control {
+        width: 210mm;
+        margin: 0 auto 20px;
+        padding: 0;
+        display: flex;
+        justify-content: flex-end;
+        z-index: 10;
+      }
+
+      .back-link {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.75rem 1.5rem;
+        white-space: nowrap;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 0.875rem;
+        font-weight: 600;
+        box-shadow: var(--shadow-md);
+        z-index: 100;
+        transition: all var(--transition-base);
+        display: block;
+      }
+
+      .back-link:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+        transform: translateX(-50%) translateY(-2px);
+      }
+    }
+
+
+    @media print {
+      :root {
+        --bg: white !important;
+        --surface: white !important;
+        --text: #1A1A1A !important;
+        --text-muted: #555555 !important;
+        --border: #E8E6E1 !important;
+      }
+
+      body {
+        background: white;
+        zoom: 70%;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .cv-container {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        min-height: auto;
+        background: white !important;
+      }
+
+      .print-control,
+      .back-link {
+        display: none !important;
+      }
+
+      .card {
+        break-inside: avoid;
+        border-color: var(--border) !important;
+        background: white !important;
+      }
+
+      .footer-qr {
+        position: fixed !important;
+        bottom: 0;
+      }
+    }
+
+    /* ============================================================
+       COMPONENTS (Website Parity)
+    ============================================================ */
+
+    /* Hero/Header Section */
+    .hero {
+      border-bottom: var(--border-thick) solid var(--accent);
+      padding-bottom: var(--space-xl);
+      margin-bottom: var(--space-3xl);
+      display: flex;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      flex-shrink: 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: var(--border-thick) solid var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-text {
+      flex-grow: 1;
+    }
+
+    .name {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: var(--space-xs);
+    }
+
+    .job-title {
+      font-size: var(--text-xl);
+      color: var(--text-muted);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .meta-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+      margin-top: var(--space-md);
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+
+    /* Layout Pattern (Aside/Main) */
+    .section-grid {
+      display: grid;
+      grid-template-columns: var(--section-aside-width) 1fr;
+      gap: var(--space-2xl);
+      margin-bottom: var(--space-3xl);
+    }
+
+    .section-aside {
+      border-right: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--text);
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-subtitle {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Cards */
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+
+    .card {
+      background: var(--surface);
+      border: var(--border-thin) solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-base);
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-xs);
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: var(--text-lg);
+      color: var(--text);
+    }
+
+    .card-date {
+      font-size: var(--text-xs);
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      background: var(--accent-muted);
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+
+    .card-sub {
+      font-style: italic;
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .card-details {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-left: 14pt;
+      list-style-type: square;
+    }
+
+    /* Pills */
+    .skills-container,
+    .docs-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .skill-pill {
+      font-size: var(--text-sm);
+      background: var(--accent-muted);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .doc-pills {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 2px 8px;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Branding & QR */
+    .footer-qr {
+      position: absolute;
+      bottom: 15mm;
+      right: 18mm;
+      width: 32mm;
+      text-align: center;
+      opacity: 0.85;
+    }
+
+    .qr-wrap {
+      width: 32mm;
+      height: 32mm;
+      border: 1px solid var(--border);
+      padding: 4px;
+      background: white;
+      margin-bottom: var(--space-xs);
+    }
+
+    .qr-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .qr-label {
+      font-size: 7pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .branding-line {
+      margin-top: auto;
+      padding-top: var(--space-xl);
+      font-style: italic;
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+
+    /* Controls */
+    .btn-print {
+      appearance: none;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.875rem;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-base);
+    }
+
+    .btn-print:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Screen Only: Controls -->
+  <div class="print-control">
+    <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+  <div class="cv-container">
+    <header class="hero">
+      <div class="profile-photo">
+        <img src="./profile.jpg" alt="Joan Tolero">
+      </div>
+      <div class="hero-text">
+        <h1 class="name">Joan Tolero</h1>
+        <p class="job-title">Customer Service &amp; Sales Professional</p>
+        <div class="meta-contact">
+          <div class="meta-item"><span>09691389248</span></div>
+          <div class="meta-item"><span>Tolerojoan082202@gmail.com</span></div>
+          <div class="meta-item"><span>Plaridel, Bulacan</span></div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Summary Section -->
+      <section class="section-grid">
+        <div class="section-aside">
+          <h2 class="section-title">Profile</h2>
+          <p class="section-subtitle">Summary</p>
+        </div>
+        <div class="section-main">
+          <p class="summary-text">A dedicated Customer Service and Sales professional with experience in retail, customer support, and e-commerce account management. Hardworking, fast-learning, and flexible with proven track record in high-pressure service environments.</p>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section class="section-grid">
+        <div class="section-aside">
+          <h2 class="section-title">Experience</h2>
+          <p class="section-subtitle">Career Path</p>
+        </div>
+        <div class="section-main">
+          <div class="card-list">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Shopee Account Manager</div>
+                <div class="card-date">Aug 2025 – Dec 2025</div>
+              </div>
+              <span class="card-sub">Osell Trading Toy Store</span>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Customer Service Representative</div>
+                <div class="card-date">Jul 2023 – Nov 2023</div>
+              </div>
+              <span class="card-sub">Osell Trading Toy Store</span>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Cashier Crew</div>
+                <div class="card-date">Nov 2021 – Jan 2023</div>
+              </div>
+              <span class="card-sub">Jollibee</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education Section -->
+      <section class="section-grid">
+        <div class="section-aside">
+          <h2 class="section-title">Education</h2>
+          <p class="section-subtitle">Academic</p>
+        </div>
+        <div class="section-main">
+          <div class="card-list">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Guiguinto National Vocational High School</div>
+                <div class="card-date">2016 – 2021</div>
+              </div>
+              <span class="card-sub">High School &amp; Senior High School</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section class="section-grid">
+        <div class="section-aside">
+          <h2 class="section-title">Skills</h2>
+          <p class="section-subtitle">Expertise</p>
+        </div>
+        <div class="section-main">
+          <div class="skills-container">
+            <span class="skill-pill">Customer Service</span>
+            <span class="skill-pill">Sales</span>
+            <span class="skill-pill">Cashiering</span>
+            <span class="skill-pill">Crew Operations</span>
+            <span class="skill-pill">Hard Working</span>
+            <span class="skill-pill">Fast Learner</span>
+            <span class="skill-pill">Flexible</span>
+            <span class="skill-pill">Works Under Pressure</span>
+            <span class="skill-pill">MS Office</span>
+            <span class="skill-pill">Canva</span>
+            <span class="skill-pill">GCash</span>
+            <span class="skill-pill">Photoshop</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Compliance Section -->
+      <section class="section-grid">
+        <div class="section-aside">
+          <h2 class="section-title">Compliance</h2>
+          <p class="section-subtitle">Documents</p>
+        </div>
+        <div class="section-main">
+          <div class="docs-container">
+            <span class="doc-pills">SSS Number</span>
+            <span class="doc-pills">TIN Number</span>
+            <span class="doc-pills">PhilHealth ID</span>
+            <span class="doc-pills">Pag-IBIG MID</span>
+            <span class="doc-pills">Birth Certificate (PSA)</span>
+          </div>
+        </div>
+      </section>
+
+      <p class="branding-line">Professional references available upon request</p>
+    </main>
+
+    <!-- QR Code Section -->
+    <div class="footer-qr">
+      <div class="qr-wrap">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://statusph.github.io/joan-tolero"
+          alt="StatusPH Verification QR">
+      </div>
+      <p class="qr-label">Verified Digital Portfolio</p>
+      <p style="font-size: 6pt; color: var(--text-muted); margin-top: 2px;">statusph.github.io/joan-tolero</p>
+    </div>
+  </div>
+
+  <!-- Screen Only: Back Navigation -->
+  <a href="./index.html" class="back-link">← Return to Website</a>
+
+  <script>
+    // Theme Awareness
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme') {
+        document.documentElement.setAttribute('data-theme', e.newValue);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
