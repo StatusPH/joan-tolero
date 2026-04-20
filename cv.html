@@ -27,21 +27,17 @@
        Shared with master.html for 1:1 Design Parity
     ============================================================ */
     :root {
-      --accent: #7C3AED;
+      --accent: #9333EA;
       --accent-color: var(--accent, #2563EB);
-      --accent-muted: #EDE9FE;
+      --accent-muted: #F3E8FF;
       --bg: #F9F8F6;
       --surface: #FFFFFF;
       --text: #1A1A1A;
       --text-muted: #6B6B6B;
       --border: #E8E6E1;
       --radius: 2px;
-      --font-display: 'DM Serif Display',
-      Georgia,
-      serif;
-      --font-body: 'DM Sans',
-      system-ui,
-      sans-serif;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
 
       /* Fixed Spacing Scale */
       --space-xs: 4px;
@@ -234,6 +230,7 @@
         background: white;
         zoom: 70%;
         -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
 
       .cv-container {
@@ -259,6 +256,7 @@
       .footer-qr {
         position: fixed !important;
         bottom: 0;
+        right: 18mm;
       }
     }
 
@@ -436,12 +434,12 @@
 
     /* Branding & QR */
     .footer-qr {
-      position: absolute;
-      bottom: 15mm;
-      right: 18mm;
+      position: static;        /* flows naturally on screen */
       width: 32mm;
       text-align: center;
       opacity: 0.85;
+      margin-top: var(--space-xl);
+      margin-left: auto;       /* pushes it right on screen */
     }
 
     .qr-wrap {
@@ -512,7 +510,7 @@
       </div>
       <div class="hero-text">
         <h1 class="name">Joan Tolero</h1>
-        <p class="job-title">Customer Service &amp; Sales Professional</p>
+        <p class="job-title">Shopee Account Manager & Customer Service Specialist</p>
         <div class="meta-contact">
           <div class="meta-item"><span>09691389248</span></div>
           <div class="meta-item"><span>Tolerojoan082202@gmail.com</span></div>
@@ -529,7 +527,7 @@
           <p class="section-subtitle">Summary</p>
         </div>
         <div class="section-main">
-          <p class="summary-text">A dedicated Customer Service and Sales professional with experience in retail, customer support, and e-commerce account management. Hardworking, fast-learning, and flexible with proven track record in high-pressure service environments.</p>
+          <p class="summary-text">Results-driven professional with extensive experience in customer service, sales, and account management. Proven track record in high-pressure environments at Jollibee and Osell Trading Toy Store. Transitioned into account management, leveraging technical tools to optimize store performance.</p>
         </div>
       </section>
 
@@ -543,15 +541,15 @@
           <div class="card-list">
             <div class="card">
               <div class="card-header">
-                <div class="card-title">Shopee Account Manager</div>
+                <div class="card-title">Shoppee Account Manager</div>
                 <div class="card-date">Aug 2025 – Dec 2025</div>
               </div>
               <span class="card-sub">Osell Trading Toy Store</span>
             </div>
             <div class="card">
               <div class="card-header">
-                <div class="card-title">Customer Service Representative</div>
-                <div class="card-date">Jul 2023 – Nov 2023</div>
+                <div class="card-title">Customer Service</div>
+                <div class="card-date">July 2023 – Nov 2023</div>
               </div>
               <span class="card-sub">Osell Trading Toy Store</span>
             </div>
@@ -561,25 +559,6 @@
                 <div class="card-date">Nov 2021 – Jan 2023</div>
               </div>
               <span class="card-sub">Jollibee</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Education Section -->
-      <section class="section-grid">
-        <div class="section-aside">
-          <h2 class="section-title">Education</h2>
-          <p class="section-subtitle">Academic</p>
-        </div>
-        <div class="section-main">
-          <div class="card-list">
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title">Guiguinto National Vocational High School</div>
-                <div class="card-date">2016 – 2021</div>
-              </div>
-              <span class="card-sub">High School &amp; Senior High School</span>
             </div>
           </div>
         </div>
@@ -595,16 +574,35 @@
           <div class="skills-container">
             <span class="skill-pill">Customer Service</span>
             <span class="skill-pill">Sales</span>
-            <span class="skill-pill">Cashiering</span>
-            <span class="skill-pill">Crew Operations</span>
+            <span class="skill-pill">Crew</span>
+            <span class="skill-pill">Cashier</span>
             <span class="skill-pill">Hard Working</span>
             <span class="skill-pill">Fast Learner</span>
             <span class="skill-pill">Flexible</span>
-            <span class="skill-pill">Works Under Pressure</span>
+            <span class="skill-pill">Can work under pressure</span>
             <span class="skill-pill">MS Office</span>
             <span class="skill-pill">Canva</span>
-            <span class="skill-pill">GCash</span>
+            <span class="skill-pill">Gcash</span>
             <span class="skill-pill">Photoshop</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education Section -->
+      <section class="section-grid">
+        <div class="section-aside">
+          <h2 class="section-title">Education</h2>
+          <p class="section-subtitle">Academic</p>
+        </div>
+        <div class="section-main">
+          <div class="card-list">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Guiguinto National Vocational</div>
+                <div class="card-date">2016 – 2021</div>
+              </div>
+              <span class="card-sub">High School & Senior High School</span>
+            </div>
           </div>
         </div>
       </section>
