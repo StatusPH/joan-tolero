@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joan Tolero - Professional Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Serif+Display:ital@0;1&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      /* Core Theme Variables */
+      --accent: #9333ea;
+      --accent-muted: #f3e8ff;
+
+      /* Base Colors */
+      --bg-color: #f8fafc;
+      --bg-secondary: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+
+      /* Typography */
+      --font-heading: 'DM Serif Display', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 4px;
+    }
+
+    /* Print disabled for website */
+    @media print {
+      body {
+        display: none !important;
+      }
+    }
+
+    /* Resets */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      font-weight: normal;
+      color: var(--text-main);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    header {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: var(--text-main);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .btn-view-cv {
+      background-color: var(--accent);
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: var(--radius);
+      font-weight: 500;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-view-cv:hover {
+      opacity: 0.9;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      min-width: 44px;
+      min-height: 44px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-main);
+      margin-bottom: 4px;
+      border-radius: 2px;
+    }
+
+    .hamburger span:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0;
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero .container {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background-color: var(--accent-muted);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #22c55e;
+      box-shadow: 0 0 0 rgba(34, 197, 94, 0.4);
+      animation: pulse-glow 2s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+      70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 32px;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-meta-item svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .hero-image img {
+      border-radius: 8px;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Standard Sections */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-inner {
+      background-color: var(--bg-secondary);
+      padding: 64px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .section-header {
+      font-size: 2.25rem;
+      margin-bottom: 40px;
+      color: var(--text-main);
+    }
+
+    /* About */
+    .about-text {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      white-space: pre-wrap;
+      text-align: justify;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-pill {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-weight: 500;
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .timeline-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .timeline-meta {
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .timeline-title {
+      font-size: 1.35rem;
+      font-family: var(--font-heading);
+      margin: 0;
+      color: var(--text-main);
+    }
+
+    .timeline-subtitle {
+      color: var(--accent);
+      font-weight: 500;
+      font-size: 1.05rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--text-main);
+      color: #fff;
+      padding: 64px 0;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      margin-bottom: 24px;
+      color: #fff;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .social-links a {
+      color: #94a3b8;
+      transition: color 0.15s;
+    }
+
+    .social-links a:hover {
+      color: #fff;
+    }
+
+    .social-links svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    .footer-meta {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 860px) {
+      .hero .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-image {
+        max-width: 320px;
+        margin: 0 auto;
+        order: -1;
+      }
+
+      .hero-meta {
+        justify-content: center;
+        margin-top: 24px;
+      }
+
+      .status-badge {
+        margin: 0 auto 24px auto;
+      }
+
+      .hero-meta-item {
+        justify-content: center;
+      }
+
+      .section-inner {
+        padding: 40px 24px;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 24px;
+        border-bottom: 1px solid var(--border-color);
+        gap: 20px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .timeline-header {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .timeline-meta {
+        color: var(--accent);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container nav-inner">
+      <div class="logo">Joan Tolero</div>
+      <button class="hamburger" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="nav-menu">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="./joan-tolero-cv.html" class="btn-view-cv">View CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-image">
+        <img src="./joan-tolero-profile.jpg" alt="Joan Tolero Profile Photo">
+      </div>
+      <div class="hero-content">
+        <div class="status-badge" data-status="open for work">
+          <div class="status-indicator"></div>
+          open for work
+        </div>
+        <h1>Joan Tolero</h1>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+            Plaridel, Bulacan
+          </div>
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            </svg>
+            Tolerojoan082202@gmail.com
+          </div>
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg>
+            09691389248
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-inner">
+        <h2 class="section-header">Professional Summary</h2>
+        <div class="about-text">Experienced Customer Service professional and Account Manager with a strong background in sales and retail operations. Proven track record as a Cashier Crew at Jollibee and Customer Service representative at Osell Trading Toy Store, recently excelling as a Shopee Account Manager. Skilled in customer relationship management, sales optimization, and store operations. A flexible, fast learner with a modern, technical mindset, dedicated to delivering high-quality service and driving business success.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <div class="section-inner">
+        <h2 class="section-header">Work Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Shopee Account Manager</h3>
+              <div class="timeline-meta">August 2025 – December 2025</div>
+            </div>
+            <div class="timeline-subtitle">Osell Trading Toy Store</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Customer Service</h3>
+              <div class="timeline-meta">July 2023 – November 2023</div>
+            </div>
+            <div class="timeline-subtitle">Osell Trading Toy Store</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">Cashier Crew</h3>
+              <div class="timeline-meta">November 2021– January 2023</div>
+            </div>
+            <div class="timeline-subtitle">Jollibee</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="container">
+      <div class="section-inner">
+        <h2 class="section-header">Education</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-header">
+              <h3 class="timeline-title">High School & Senior High School</h3>
+              <div class="timeline-meta">2016 – 2021</div>
+            </div>
+            <div class="timeline-subtitle">Guiguinto National Vocational</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-inner">
+        <h2 class="section-header">Skills & Expertise</h2>
+        
+        <h3 class="timeline-title" style="margin-bottom: 16px; font-size: 1.25rem;">Technical Skills</h3>
+        <div class="skills-grid" style="margin-bottom: 32px;">
+          <span class="skill-pill">Customer Service</span>
+          <span class="skill-pill">Sales</span>
+          <span class="skill-pill">Crew</span>
+          <span class="skill-pill">Cashier</span>
+        </div>
+
+        <h3 class="timeline-title" style="margin-bottom: 16px; font-size: 1.25rem;">Soft Skills</h3>
+        <div class="skills-grid" style="margin-bottom: 32px;">
+          <span class="skill-pill">Hard Working</span>
+          <span class="skill-pill">Fast Learner</span>
+          <span class="skill-pill">Flexible</span>
+          <span class="skill-pill">Can work under pressure</span>
+        </div>
+
+        <h3 class="timeline-title" style="margin-bottom: 16px; font-size: 1.25rem;">Tools & Software</h3>
+        <div class="skills-grid">
+          <span class="skill-pill">MS Office</span>
+          <span class="skill-pill">Canva</span>
+          <span class="skill-pill">Gcash</span>
+          <span class="skill-pill">Photoshop</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pre-employment">
+    <div class="container">
+      <div class="section-inner">
+        <h2 class="section-header">Pre-employment Readiness</h2>
+        <div class="skills-grid">
+          <span class="skill-pill">SSS Number</span>
+          <span class="skill-pill">TIN Number</span>
+          <span class="skill-pill">PhilHealth ID</span>
+          <span class="skill-pill">Pag-IBIG MID</span>
+          <span class="skill-pill">Birth Certificate (PSA)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-logo">StatusPH</div>
+      <div class="social-links">
+        <a href="https://facebook.com/Joan Tolero" aria-label="Facebook">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+          </svg>
+        </a>
+        <a href="https://instagram.com/Joan Tolero" aria-label="Instagram">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+          </svg>
+        </a>
+      </div>
+      <div class="footer-meta">
+        <strong>Stand out.</strong> Because every professional deserves their own premium website.<br>
+        Built with StatusPH.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('nav-toggle').addEventListener('click', function () {
+      document.getElementById('nav-menu').classList.toggle('active');
+    });
+  </script>
+</body>
+
+</html>
