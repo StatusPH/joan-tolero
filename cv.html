@@ -15,7 +15,7 @@
     :root {
       /* Theme Variables mapped from Website */
       --accent: #8b5cf6;
-      --accent-muted: #ede9fe;
+      --accent-muted: #ddd6fe;
       --bg-color: #ffffff;
       --text-main: #0f172a;
       --text-muted: #334155;
@@ -23,6 +23,13 @@
       --border-color: #e2e8f0;
       --font-heading: 'DM Serif Display', serif;
       --font-body: 'DM Sans', sans-serif;
+
+      /* Layout Density: Tier 3 (Condensed) */
+      --base-font-size: 11px;
+      --section-gap: 14px;
+      --entry-gap: 8px;
+      --page-v-padding: 10mm;
+      --page-h-padding: 12mm;
     }
 
     * {
@@ -36,7 +43,7 @@
       background-color: #f1f5f9; /* Outer browser background */
       color: var(--text-main);
       line-height: 1.5;
-      font-size: 14px; /* Balanced for A4 */
+      font-size: var(--base-font-size);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -83,7 +90,7 @@
       width: 210mm;
       min-height: 297mm;
       margin: 40px auto;
-      padding: 15mm 20mm;
+      padding: var(--page-v-padding) var(--page-h-padding);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       position: relative;
       overflow: hidden;
@@ -92,16 +99,16 @@
     /* Header */
     .cv-header {
       display: flex;
-      gap: 32px;
+      gap: 24px;
       border-bottom: 2px solid var(--accent);
-      padding-bottom: 24px;
-      margin-bottom: 24px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
       align-items: center;
     }
 
     .profile-photo {
-      width: 130px;
-      height: 130px;
+      width: 100px;
+      height: 100px;
       flex-shrink: 0;
     }
 
@@ -115,7 +122,7 @@
 
     .header-content h1 {
       font-family: var(--font-heading);
-      font-size: 3rem;
+      font-size: 2rem;
       line-height: 1.1;
       margin-bottom: 4px;
       color: var(--text-main);
@@ -140,16 +147,16 @@
 
     /* Sections */
     .cv-section {
-      margin-bottom: 28px;
+      margin-bottom: var(--section-gap);
     }
 
     .cv-section-title {
       font-family: var(--font-heading);
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       color: var(--accent);
       border-bottom: 1px solid var(--border-color);
-      padding-bottom: 6px;
-      margin-bottom: 16px;
+      padding-bottom: 4px;
+      margin-bottom: 12px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -162,7 +169,7 @@
 
     /* Timeline Entries */
     .entry {
-      margin-bottom: 18px;
+      margin-bottom: var(--entry-gap);
     }
 
     .entry-header {
@@ -223,9 +230,9 @@
     /* Footer */
     .cv-footer {
       position: absolute;
-      bottom: 15mm;
-      left: 20mm;
-      right: 20mm;
+      bottom: 10mm;
+      left: var(--page-h-padding);
+      right: var(--page-h-padding);
       padding-top: 16px;
       border-top: 1px solid var(--border-color);
       display: flex;
@@ -258,16 +265,26 @@
     /* Responsive adjustments for SCREEN viewing */
     @media (max-width: 210mm) {
       body {
-        background-color: #fff;
+        background-color: #f1f5f9;
+        overflow-x: hidden;
+        padding: 0;
+        margin: 0;
+        height: auto;
       }
       .cv-page {
-        width: 100%;
+        width: 210mm;
         margin: 0;
+        transform: scale(calc(100vw / 210mm));
+        transform-origin: top center;
         box-shadow: none;
-        padding: 10mm;
       }
       .print-controls {
-        position: static;
+        position: relative;
+        z-index: 1001;
+      }
+      /* Adjust footer positioning for scaled view */
+      .cv-footer {
+        bottom: 15mm;
       }
     }
 
@@ -276,7 +293,9 @@
       body {
         background: #fff !important;
         margin: 0 !important;
-        padding: 0 !important;
+        padding: 0 !important; /* Page margins are handled by @page */
+        width: 100% !important;
+        box-shadow: none !important;
       }
 
       .print-controls {
@@ -330,14 +349,13 @@
           <span>📍 Plaridel, Bulacan</span>
           <span>✉️ Tolerojoan082202@gmail.com</span>
           <span>📞 09691389248</span>
-          <span>🔗 Joantolero</span>
         </div>
       </div>
     </header>
 
     <section class="cv-section">
       <h2 class="cv-section-title">Professional Summary</h2>
-      <div class="summary-text">Dedicated and versatile professional with a strong background in customer service and sales. Proven track record as a Cashier Crew member at Jollibee and a Customer Service Representative at Osell Trading Toy Store, where I also excelled as a Shopee Account Manager. Known for being a fast learner and a flexible team player.</div>
+      <div class="summary-text">A dedicated professional with a strong background in customer service, sales, and retail operations. With extensive experience as a Cashier Crew at Jollibee and roles as a Customer Service Representative and Shopee Account Manager at Osell Trading Toy Store, I have developed expertise.</div>
     </section>
 
     <section class="cv-section">
@@ -346,21 +364,21 @@
         <div class="entry">
           <div class="entry-header">
             <div class="entry-title">Shoppee Account Manager</div>
-            <div class="entry-date">August 2025 – December 2025</div>
+            <div class="entry-date">Aug 2025 – Dec 2025</div>
           </div>
           <div class="entry-subtitle">Osell Trading Toy Store</div>
         </div>
         <div class="entry">
           <div class="entry-header">
             <div class="entry-title">Customer Service</div>
-            <div class="entry-date">July 2023 – November 2023</div>
+            <div class="entry-date">July 2023 – Nov 2023</div>
           </div>
           <div class="entry-subtitle">Osell Trading Toy Store</div>
         </div>
         <div class="entry">
           <div class="entry-header">
             <div class="entry-title">Cashier Crew</div>
-            <div class="entry-date">November 2021 – January 2023</div>
+            <div class="entry-date">Nov 2021– Jan 2023</div>
           </div>
           <div class="entry-subtitle">Jollibee</div>
         </div>
