@@ -13,9 +13,12 @@
 
   <style>
     :root {
-      /* Theme Variables mapped from Website */
-      --accent: #8b5cf6;
-      --accent-muted: #ddd6fe;
+      --cv-scale: 1;
+
+      /* Theme Variables */
+      --accent: #A855F7;
+      --accent-muted: #F3E8FF;
+
       --bg-color: #ffffff;
       --text-main: #0f172a;
       --text-muted: #334155;
@@ -24,12 +27,12 @@
       --font-heading: 'DM Serif Display', serif;
       --font-body: 'DM Sans', sans-serif;
 
-      /* Layout Density: Tier 3 (Condensed) */
-      --base-font-size: 11px;
-      --section-gap: 14px;
-      --entry-gap: 8px;
-      --page-v-padding: 10mm;
-      --page-h-padding: 12mm;
+      /* Layout Density (Tier 1: Normal) */
+      --base-font-size: 14px;
+      --section-gap: 28px;
+      --entry-gap: 18px;
+      --page-v-padding: 15mm;
+      --page-h-padding: 20mm;
     }
 
     * {
@@ -40,7 +43,7 @@
 
     body {
       font-family: var(--font-body);
-      background-color: #f1f5f9; /* Outer browser background */
+      background-color: #f1f5f9;
       color: var(--text-main);
       line-height: 1.5;
       font-size: var(--base-font-size);
@@ -59,7 +62,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     .print-controls button {
@@ -84,31 +87,55 @@
       margin-top: 8px;
     }
 
+    /* Return to Website Link */
+    .back-link {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: var(--text-main);
+      color: white !important;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      transform: translateY(-2px);
+      background: var(--accent);
+    }
+
     /* CV Canvas - Fixed A4 Structure */
     .cv-page {
       background: var(--bg-color);
-      width: 210mm;
-      min-height: 297mm;
+      width: calc(210mm / var(--cv-scale, 1));
+      min-height: calc(350mm / var(--cv-scale, 1));
       margin: 40px auto;
-      padding: var(--page-v-padding) var(--page-h-padding);
+      padding: calc(var(--page-v-padding) / var(--cv-scale, 1)) calc(var(--page-h-padding) / var(--cv-scale, 1));
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       position: relative;
       overflow: hidden;
+      transform: scale(var(--cv-scale, 1));
+      transform-origin: top center;
+      margin-bottom: calc(40px - (297mm / var(--cv-scale, 1) * (1 - var(--cv-scale, 1))));
     }
 
     /* Header */
     .cv-header {
       display: flex;
-      gap: 24px;
+      gap: 32px;
       border-bottom: 2px solid var(--accent);
-      padding-bottom: 16px;
-      margin-bottom: 16px;
+      padding-bottom: 24px;
+      margin-bottom: 24px;
       align-items: center;
     }
 
     .profile-photo {
-      width: 100px;
-      height: 100px;
+      width: 130px;
+      height: 130px;
       flex-shrink: 0;
     }
 
@@ -122,7 +149,7 @@
 
     .header-content h1 {
       font-family: var(--font-heading);
-      font-size: 2rem;
+      font-size: 3rem;
       line-height: 1.1;
       margin-bottom: 4px;
       color: var(--text-main);
@@ -152,11 +179,11 @@
 
     .cv-section-title {
       font-family: var(--font-heading);
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: var(--accent);
       border-bottom: 1px solid var(--border-color);
-      padding-bottom: 4px;
-      margin-bottom: 12px;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -227,13 +254,13 @@
       font-weight: 600;
     }
 
-    /* Footer */
+    /* Footer & QR Code */
     .cv-footer {
       position: absolute;
-      bottom: 10mm;
-      left: var(--page-h-padding);
-      right: var(--page-h-padding);
-      padding-top: 16px;
+      bottom: calc(var(--page-v-padding) / var(--cv-scale, 1));
+      left: calc(var(--page-h-padding) / var(--cv-scale, 1));
+      right: calc(var(--page-h-padding) / var(--cv-scale, 1));
+      padding-top: 12px;
       border-top: 1px solid var(--border-color);
       display: flex;
       justify-content: space-between;
@@ -244,17 +271,18 @@
 
     .qr-container {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      align-items: flex-end;
+      gap: 10px;
       text-align: right;
     }
 
     .qr-code {
-      width: 64px;
-      height: 64px;
+      width: 60px;
+      height: 60px;
       background: white;
-      padding: 4px;
+      padding: 2px;
       border: 1px solid var(--border-color);
+      flex-shrink: 0;
     }
 
     .qr-code img {
@@ -262,7 +290,7 @@
       height: 100%;
     }
 
-    /* Responsive adjustments for SCREEN viewing */
+    /* Responsive adjustments for SCREEN viewing (Proportional Scaling Only) */
     @media (max-width: 210mm) {
       body {
         background-color: #f1f5f9;
@@ -271,61 +299,85 @@
         margin: 0;
         height: auto;
       }
+
       .cv-page {
         width: 210mm;
-        margin: 0;
+        margin: 0 auto;
         transform: scale(calc(100vw / 210mm));
-        transform-origin: top center;
+        transform-origin: top left;
         box-shadow: none;
       }
+
       .print-controls {
         position: relative;
         z-index: 1001;
       }
-      /* Adjust footer positioning for scaled view */
-      .cv-footer {
-        bottom: 15mm;
+
+      .back-link {
+        display: none;
+        /* Hide on mobile screens to avoid overlap with scaled canvas */
       }
     }
 
-    /* PRINT SPECIFIC RULES - THE FIX */
+    /* PRINT SPECIFIC RULES */
     @media print {
       body {
         background: #fff !important;
         margin: 0 !important;
-        padding: 0 !important; /* Page margins are handled by @page */
-        width: 100% !important;
-        box-shadow: none !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
 
-      .print-controls {
+      .print-controls,
+      .back-link {
         display: none !important;
+      }
+
+      :root {
+        --base-font-size: 11pt;
+        --section-gap: 12pt;
+        --entry-gap: 8pt;
+        --page-v-padding: 10mm;
+        --page-h-padding: 15mm;
       }
 
       .cv-page {
         margin: 0 !important;
-        padding: 0 !important; /* Page margins are handled by @page */
-        width: 100% !important;
+        padding: var(--page-v-padding) var(--page-h-padding) 40mm var(--page-h-padding) !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        transform: none !important;
         box-shadow: none !important;
+        position: relative !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background: white !important;
+      }
+
+      * {
+        line-height: 1.15 !important;
       }
 
       .cv-footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-      }
-      
-      /* Ensure colors are printed */
-      * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+        position: fixed !important;
+        bottom: 15mm !important;
+        left: 15mm !important;
+        right: 15mm !important;
+        width: calc(210mm - 30mm) !important;
+        border-top: 1px solid var(--border-color) !important;
+        padding-top: 10pt !important;
+        background: white !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
       }
     }
 
     @page {
       size: A4 portrait;
-      margin: 15mm 15mm 20mm 15mm;
+      margin: 0;
     }
   </style>
 </head>
@@ -337,6 +389,8 @@
     <p>Premium High-Fidelity Resume • Best saved as PDF via Chrome or Safari</p>
   </div>
 
+  <a href="./index.html" class="back-link">← Return to Website</a>
+
   <div class="cv-page">
     <header class="cv-header">
       <div class="profile-photo">
@@ -344,7 +398,7 @@
       </div>
       <div class="header-content">
         <h1>Joan Tolero</h1>
-        <div class="header-title">open for work</div>
+        <div class="header-title">Open for Work</div>
         <div class="contact-grid">
           <span>📍 Plaridel, Bulacan</span>
           <span>✉️ Tolerojoan082202@gmail.com</span>
@@ -355,7 +409,9 @@
 
     <section class="cv-section">
       <h2 class="cv-section-title">Professional Summary</h2>
-      <div class="summary-text">A dedicated professional with a strong background in customer service, sales, and retail operations. With extensive experience as a Cashier Crew at Jollibee and roles as a Customer Service Representative and Shopee Account Manager at Osell Trading Toy Store, I have developed expertise.</div>
+      <div class="summary-text">Dynamic and results-driven professional with a strong background in customer service,
+        sales, and e-commerce management. With over four years of experience in retail and trading environments, I have
+        developed a keen eye for operational efficiency and customer satisfaction.</div>
     </section>
 
     <section class="cv-section">
@@ -363,24 +419,24 @@
       <div class="timeline">
         <div class="entry">
           <div class="entry-header">
-            <div class="entry-title">Shoppee Account Manager</div>
-            <div class="entry-date">Aug 2025 – Dec 2025</div>
+            <div class="entry-title">Shopee Account Manager</div>
+            <div class="entry-date">August 2025 – February 2026</div>
           </div>
           <div class="entry-subtitle">Osell Trading Toy Store</div>
         </div>
         <div class="entry">
           <div class="entry-header">
             <div class="entry-title">Customer Service</div>
-            <div class="entry-date">July 2023 – Nov 2023</div>
+            <div class="entry-date">July 2023 – November 2023</div>
           </div>
           <div class="entry-subtitle">Osell Trading Toy Store</div>
         </div>
         <div class="entry">
           <div class="entry-header">
             <div class="entry-title">Cashier Crew</div>
-            <div class="entry-date">Nov 2021– Jan 2023</div>
+            <div class="entry-date">November 2021– January 2023</div>
           </div>
-          <div class="entry-subtitle">Jollibee</div>
+          <div class="entry-subtitle">Jolibee</div>
         </div>
       </div>
     </section>
@@ -405,12 +461,12 @@
           <strong>Technical Skills:</strong>
           <span>Customer Service, Sales, Crew, Cashier</span>
         </div>
-        
+
         <div class="skills-block">
           <strong>Soft Skills:</strong>
           <span>Hard Working, Fast Learner, Flexible, Can work under pressure</span>
         </div>
-        
+
         <div class="skills-block">
           <strong>Tools & Software:</strong>
           <span>MS Office, Canva, Gcash, Photoshop</span>
@@ -435,9 +491,11 @@
         <p style="margin-top: 2px;">statusph.github.io/joan-tolero</p>
       </div>
       <div class="qr-container">
-        <span>Scan for Online Portfolio</span>
+        <span style="font-size: 0.75rem; color: var(--text-light); margin-bottom: 4px;">Scan for Online Portfolio</span>
         <div class="qr-code">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://statusph.github.io/joan-tolero" alt="QR Code">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://statusph.github.io/joan-tolero"
+            alt="QR Code">
         </div>
       </div>
     </footer>
